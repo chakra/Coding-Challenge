@@ -17,6 +17,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import madrazo.constants.CommonConstants;
 
@@ -26,7 +28,7 @@ import com.sun.xml.internal.ws.util.StringUtils;
  * This class reads the dictionary and determines every words' number sequences.
  * 
  * @author Andrew
- * @version 00.01
+ * @version 00.02
  */
 public class DictionaryReader
 {
@@ -184,6 +186,19 @@ public class DictionaryReader
         // into the dictionary.
         nValue = Integer.parseInt( oInteger.toString( ) );
         System.out.println( "Adding: " + sWord + " = " + nValue );
-        coDictionary.put( sWord, nValue );
+        
+        // Check if the number has already been encountered.
+        if ( coDictionary.containsKey( nValue ) )
+        {
+            // Add the word into list.
+            coDictionary.get( nValue ).add( sWord );
+        }
+        else
+        {
+            // Add the number and its word to the map.
+            List<String> oWordList = new ArrayList<String>( );
+            oWordList.add( sWord );
+            coDictionary.put( nValue, oWordList );
+        }
     }
 }
