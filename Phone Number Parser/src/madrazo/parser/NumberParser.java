@@ -132,7 +132,7 @@ public class NumberParser
                         for ( String sWord : oWordList )
                         {
                             // Loop through the word list.
-                            oResult.add( sAppend + sWord );
+                            oResult.add( sWord );
                         }
                     }
                 }
