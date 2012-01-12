@@ -2,6 +2,8 @@ CODING
 CHALLENGE
 CALL
 ME
+MO
+OM
 sausage
 blubber
 pencil
@@ -100,3 +102,4 @@ silently
 tawesomated
 joshing         
 pong
+gag

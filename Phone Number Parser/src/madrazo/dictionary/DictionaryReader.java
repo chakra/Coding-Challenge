@@ -17,16 +17,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import madrazo.constants.CommonConstants;
-
-import com.sun.xml.internal.ws.util.StringUtils;
 
 /**
  * This class reads the dictionary and determines every words' number sequences.
  * 
  * @author Andrew
- * @version 00.01
+ * @version 00.02
  */
 public class DictionaryReader
 {
@@ -54,7 +54,7 @@ public class DictionaryReader
      */
     public DictionaryReader( String sDictionaryName )
     {
-        if ( sDictionaryName != null && sDictionaryName.equals( CommonConstants.STR_EMPTY ) )
+        if ( sDictionaryName == null || sDictionaryName.equals( CommonConstants.STR_EMPTY ) )
         {
             sDictionaryName = CommonConstants.STR_DEF_DICTIONARY;
         }
@@ -74,12 +74,12 @@ public class DictionaryReader
         catch ( FileNotFoundException e )
         {
             System.err.println( "Error occurred while accessing the file: " + sDictionaryName );
-            System.err.println( e.getStackTrace( ) );
+            e.printStackTrace( );
         }
         catch ( IOException e )
         {
             System.err.println( "Error occurred while reading the file: " + sDictionaryName );
-            System.err.println( e.getStackTrace( ) );
+            e.printStackTrace( );
         }
 
     }
@@ -99,13 +99,12 @@ public class DictionaryReader
 
         if ( oReader != null )
         {
-            sWord = oReader.readLine( );
-            while ( sWord != null )
+            while ( ( sWord = oReader.readLine( ) ) != null )
             {
                 // Trim the line of leading and trailing white spaces.
-                sWord = StringUtils.capitalize( sWord.trim( ) );
+                sWord = sWord.trim( );
 
-                if ( !sWord.equals( CommonConstants.STR_EMPTY ) )
+                if ( sWord.equals( CommonConstants.STR_EMPTY ) )
                 {
                     continue;
                 }
@@ -136,12 +135,13 @@ public class DictionaryReader
     private void addWord( String sWord )
     {
         String sCurrentChar = null;
-        int nValue = 0;
+        String sValue = CommonConstants.STR_EMPTY;
 
         // Initialize the integer string buffer.
         StringBuffer oInteger = new StringBuffer( );
+        sWord = sWord.toUpperCase( );
 
-        // Traverse through the line to
+        // Traverse through the word
         for ( int i = 0; i < sWord.length( ); i++ )
         {
             sCurrentChar = String.valueOf( sWord.charAt( i ) );
@@ -182,8 +182,25 @@ public class DictionaryReader
 
         // Convert the number sequence into an integer and add them
         // into the dictionary.
-        nValue = Integer.parseInt( oInteger.toString( ) );
-        System.out.println( "Adding: " + sWord + " = " + nValue );
-        coDictionary.put( sWord, nValue );
+        sValue = oInteger.toString( );
+
+        // Check if the number has already been encountered.
+        if ( coDictionary.containsKey( sValue ) )
+        {
+            List<String> oWordList = coDictionary.get( sValue );
+
+            if ( !oWordList.contains( sWord ) )
+            {
+                // The word is new. Add the word into the list.
+                oWordList.add( sWord );
+            }
+        }
+        else
+        {
+            // Add the number and its word to the map.
+            List<String> oWordList = new ArrayList<String>( );
+            oWordList.add( sWord );
+            coDictionary.put( sValue, oWordList );
+        }
     }
 }
