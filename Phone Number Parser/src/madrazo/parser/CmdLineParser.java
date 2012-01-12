@@ -39,8 +39,6 @@ public class CmdLineParser extends NumberParser
 
     /**
      * Starts up the STDIN to receive input.
-     * 
-     * @return
      */
     public void analyzeNumbers()
     {
@@ -56,7 +54,7 @@ public class CmdLineParser extends NumberParser
         {
             System.out.print( "Input number: " );
             sLine = oScanner.nextLine( ).trim( );
-            
+
             if ( CommonConstants.STR_QUIT.startsWith( sLine ) )
             {
                 // End the application.
@@ -66,7 +64,7 @@ public class CmdLineParser extends NumberParser
             {
                 // Analyze the line.
                 oResult = analyzeNumber( sLine );
-                
+
                 if ( oResult.size( ) > 1 )
                 {
                     System.out.println( "The results are: " );
