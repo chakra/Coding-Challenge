@@ -49,7 +49,7 @@ public class FileParser extends NumberParser
      * @param sPath
      *            The path to the numbers file, including the filename.
      */
-    public Map<String, List<String>> analyzeNumbers( String sPath )
+    public Map<String, List<String>> analyzeNumbers( String sPath ) throws FileNotFoundException
     {
         File oFile = new File( sPath );
         BufferedReader oReader = null;
@@ -75,8 +75,7 @@ public class FileParser extends NumberParser
         }
         catch ( FileNotFoundException e )
         {
-            System.err.println( "Error occurred while accessing the file: " + sPath );
-            e.printStackTrace( );
+            throw e;
         }
         catch ( IOException e )
         {
