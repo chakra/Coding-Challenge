@@ -76,7 +76,7 @@ public interface CommonConstants
     /**
      * The quit string.
      */
-    String STR_QUIT = "quit";
+    String STR_EXIT = "exit";
 
     /**
      * An empty list.
@@ -87,4 +87,15 @@ public interface CommonConstants
      * Dash
      */
     String STR_DASH = "-";
+
+    /**
+     * The dictionary file option.
+     */
+    String STR_DICT_OPTION = "-d";
+
+    /**
+     * Usage instructions.
+     */
+    String STR_INSTRUCTIONS = "Usage: java PhoneNumberParser [-d \"Dictionary File\"] [Filename / Sets of Numbers]";
+    
 }
