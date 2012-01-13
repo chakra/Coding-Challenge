@@ -15,6 +15,7 @@ package madrazo.parser;
 import java.util.List;
 import java.util.Scanner;
 
+import madrazo.PhoneNumberParser;
 import madrazo.constants.CommonConstants;
 import madrazo.dictionary.Dictionary;
 
@@ -48,16 +49,17 @@ public class CmdLineParser extends NumberParser
 
         System.out.println( "PHONE NUMBER ANALYZER" );
         System.out.println( "\"Looks for words in your phone number!\"" );
-        System.out.println( "(Type \"quit\" if you want to end.)\n" );
+        System.out.println( "(Type \"" + CommonConstants.STR_EXIT + "\" if you want to end.)\n" );
 
         while ( true )
         {
             System.out.print( "Input number: " );
             sLine = oScanner.nextLine( ).trim( );
 
-            if ( CommonConstants.STR_QUIT.startsWith( sLine ) )
+            if ( CommonConstants.STR_EXIT.startsWith( sLine ) )
             {
                 // End the application.
+                System.out.println( "Exiting Phone Number Parser." );
                 break;
             }
             else
@@ -65,22 +67,8 @@ public class CmdLineParser extends NumberParser
                 // Analyze the line.
                 oResult = analyzeNumber( sLine );
 
-                if ( oResult.size( ) > 1 )
-                {
-                    System.out.println( "The results are: " );
-                    for ( int i = 1; i <= oResult.size( ); i++ )
-                    {
-                        System.out.println( i + ". " + oResult.get( i - 1 ) );
-                    }
-                }
-                else if ( oResult.size( ) > 0 )
-                {
-                    System.out.println( " The result is: " + oResult.get( 0 ) );
-                }
-                else
-                {
-                    System.out.println( "No words were found in the number: " + sLine );
-                }
+                // Display the results.
+                PhoneNumberParser.displayResults( sLine, oResult );
             }
         }
     }
