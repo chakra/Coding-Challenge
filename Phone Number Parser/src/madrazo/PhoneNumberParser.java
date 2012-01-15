@@ -79,7 +79,7 @@ public class PhoneNumberParser
 
                     try
                     {
-                        oResults = oFileParser.analyzeNumbers( sCurrent );
+                        oResults = oFileParser.analyzeFile( sCurrent );
 
                         displayResults( oResults );
                     }
@@ -160,6 +160,9 @@ public class PhoneNumberParser
             {
                 System.out.println( "No words were found in the sequence: " + sKey );
             }
+            
+            // Insert a line for separation and readability.
+            System.out.println( );
         }
     }
 }

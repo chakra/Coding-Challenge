@@ -46,12 +46,12 @@ public class FileParser extends NumberParser
     /**
      * Analyzes the numbers found in the filename.
      * 
-     * @param sPath
-     *            The path to the numbers file, including the filename.
+     * @param sFileName
+     *            The filename of the input file.
      */
-    public Map<String, List<String>> analyzeNumbers( String sPath ) throws FileNotFoundException
+    public Map<String, List<String>> analyzeFile( String sFileName ) throws FileNotFoundException
     {
-        File oFile = new File( sPath );
+        File oFile = new File( CommonConstants.STR_DEF_INPUT_DIR + sFileName );
         BufferedReader oReader = null;
         FileReader oFileReader = null;
         String sLine = null;
@@ -79,7 +79,7 @@ public class FileParser extends NumberParser
         }
         catch ( IOException e )
         {
-            System.err.println( "Error occurred while reading the file: " + sPath );
+            System.err.println( "Error occurred while reading the file: " + sFileName );
             e.printStackTrace( );
         }
         
