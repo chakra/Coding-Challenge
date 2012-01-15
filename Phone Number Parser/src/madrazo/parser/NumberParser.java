@@ -12,6 +12,7 @@
 
 package madrazo.parser;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +61,17 @@ public class NumberParser
         String sRemaining;
         String sResult;
         String sAppend;
+        
+        try
+        {
+            // Attempt to parse the number.
+            new BigInteger( sCleanNumber );
+        }
+        catch ( NumberFormatException e )
+        {
+            // Unable to parse! Invalid number. Clear the string to avoid processing.
+            sCleanNumber = CommonConstants.STR_EMPTY;
+        }
 
         for ( int nBegin = 0; nBegin < sCleanNumber.length( ) - 1; nBegin++ )
         {
@@ -148,7 +160,7 @@ public class NumberParser
      * 
      * @param sNumber
      *            The number to be cleaned.
-     * @return The cleaned number as an integer value.
+     * @return The cleaned number.
      */
     private String cleanNumber( String sNumber )
     {
