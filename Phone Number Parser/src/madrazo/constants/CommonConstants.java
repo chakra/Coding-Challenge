@@ -31,7 +31,12 @@ public interface CommonConstants
     /**
      * The directory of the default coding dictionary.
      */
-    String STR_DEF_DIRECTORY = "../dict/";
+    String STR_DEF_DICT_DIR = "../dict/";
+    
+    /**
+     * The directory where to find the input files.
+     */
+    String STR_DEF_INPUT_DIR = "../input/";
 
     /**
      * The letters found in phone key 2.

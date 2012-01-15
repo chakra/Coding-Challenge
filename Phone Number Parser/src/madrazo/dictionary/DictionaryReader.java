@@ -59,7 +59,7 @@ public class DictionaryReader
             sDictionaryName = CommonConstants.STR_DEF_DICTIONARY;
         }
 
-        File oFile = new File( CommonConstants.STR_DEF_DIRECTORY + sDictionaryName );
+        File oFile = new File( CommonConstants.STR_DEF_DICT_DIR + sDictionaryName );
         BufferedReader oReader = null;
         FileReader oFileReader = null;
         try
